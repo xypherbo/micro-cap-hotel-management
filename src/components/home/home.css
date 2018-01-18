@@ -1,5 +1,140 @@
-.my-dot {}
+.banner-slide {
+    position: relative;
+    height: 100vh;
+    min-height: 100vh;
+}
 
-.slider-image {
-    width: 100%
+@media screen and (max-width: 1280px) {
+    .banner-slide {
+        padding: 0;
+        min-height: 75vh;
+        height: 75vh !important;
+    }
+}
+
+.banner-slide {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+    z-index: 0;
+}
+
+.banner-slide:after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #000;
+    opacity: 0.35;
+}
+
+.banner-slide .inner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 1
+}
+
+.banner-slide .inner> :last-child {
+    margin-bottom: 0;
+}
+
+.banner-slide p {
+    color: rgba(255, 255, 255, 0.65);
+    text-transform: uppercase;
+    font-size: 1rem;
+    font-weight: 300;
+    margin: 0;
+    padding-bottom: 1.75rem;
+    letter-spacing: .25rem;
+    white-space: nowrap;
+}
+
+.banner-slide p:after {
+    content: '';
+    position: absolute;
+    margin: auto;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 50%;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.65);
+}
+
+.banner-slide h2 {
+    font-size: 7rem;
+    margin-bottom: 0;
+    color: #FFF;
+    font-weight: 300;
+}
+
+.banner-slide a {
+    color: #FFF;
+    text-decoration: none;
+}
+
+.banner-container {
+    height: 75vh;
+    min-height: 75vh;
+}
+
+.banner-dot {
+    bottom: 1.5em;
+    left: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    z-index: 2;
+}
+
+.banner-dot li {
+    cursor: pointer;
+    display: inline-block;
+    height: 2em;
+    overflow: hidden;
+    padding: 0;
+    position: relative;
+    text-indent: 2em;
+    width: 2em;
+}
+
+.banner-dot li button {
+    outline-color: transparent;
+}
+
+.banner-dot li button::before {
+    background: rgba(255, 255, 255, 0.35);
+    border-radius: 100%;
+    content: '';
+    display: inline-block;
+    height: 0.7em;
+    left: 50%;
+    margin: -0.4em 0 0 -0.4em;
+    position: absolute;
+    text-indent: 0;
+    top: 50%;
+    width: 0.7em;
+}
+
+.banner-dot li.slick-active button::before {
+    background: #fff;
+}
+
+header p {
+    position: relative;
+}
+
+.react-parallax-content {
+    position: initial !important;
 }

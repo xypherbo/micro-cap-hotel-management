@@ -1,3 +1,56 @@
-.nav{
-    padding:1.5rem;
+.navbar-dark.custom {
+    color: #a6a6a6;
+    cursor: default;
+    height: 3.25em;
+    left: 0;
+    line-height: 3.25em;
+    text-align: right;
+    width: 100%;
+    z-index: 10001;
+}
+
+.bg-dark.custom {
+    background: rgba(0, 0, 0, 0.975) !important;
+}
+
+.custom .navbar-brand {
+    margin-left: 0.25em;
+    color: white !important;
+}
+
+.navbar-dark.custom.reveal {
+    -moz-animation: reveal-header 0.5s ease;
+    -webkit-animation: reveal-header 0.5s ease;
+    -ms-animation: reveal-header 0.5s ease;
+    animation: reveal-header 0.5s ease;
+}
+
+.headroom {
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+}
+
+.headroom--unfixed {
+    position: relative;
+    transform: translateY(0);
+}
+
+.headroom--scrolled {
+    transition: transform 200ms ease-in-out;
+}
+
+.headroom--unpinned {
+    position: fixed;
+    transform: translateY(-100%);
+}
+
+.headroom--pinned {
+    position: fixed;
+    transform: translateY(0%);
+}
+
+.menu {
+    color: white !important;
 }

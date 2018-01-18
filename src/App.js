@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import './App.css';
 
 import { BrowserRouter as Router } from 'react-router-dom'
-import { Navbar } from "./components"
+import { Navbar, Menu } from "./components"
 import Routes from "./routes/routes.js"
 
 class App extends Component {
@@ -11,7 +11,8 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <Navbar></Navbar>
+          <Navbar onMenuStateChange={(state) => { }}></Navbar>
+          <Menu onMenuStateChange={() => { }}></Menu>
           <Routes></Routes>
         </div>
       </Router>
