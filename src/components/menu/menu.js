@@ -12,8 +12,8 @@ class Menu extends Component {
         return (
             <div className={"side-menu " + (this.props.menuState ? "visible" : "")} >
                 <ul className="mlinks">
-                    <li><Link to="/">Home</Link></li>
-                    <li><Link to="/login">Login</Link></li>
+                    <li><Link to="/" onClick={this.close}>Home</Link></li>
+                    <li><Link to="/login" onClick={this.close}>Sign in</Link></li>
                 </ul>
                 <a className="cross" onClick={this.close}> <i className="fa fa-times"></i></a>
             </div >
