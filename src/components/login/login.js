@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-
 import { Link } from 'react-router-dom';
+import { FirebaseAuth } from 'react-firebaseui';
+import firebase from 'firebase';
 
-var firebase = require('firebase');
-var firebaseui = require('firebaseui');
-var config = {
+const config = {
     apiKey: "AIzaSyDBt1G9araVMvUzpULK7Jcu-gD3d0INXig",
     authDomain: "hotel-1ec5c.firebaseapp.com",
     databaseURL: "https://hotel-1ec5c.firebaseio.com",
@@ -13,45 +12,25 @@ var config = {
     messagingSenderId: "1059369533781"
 };
 firebase.initializeApp(config);
-var ui = new firebaseui.auth.AuthUI(firebase.auth());
+
+const uiConfig = {
+    signInFlow: 'popup',
+    signInSuccessUrl: '/signedIn',
+    signInOptions: [
+        firebase.auth.EmailAuthProvider.PROVIDER_ID,
+        firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+        firebase.auth.FacebookAuthProvider.PROVIDER_ID
+    ]
+};
 
 class Login extends Component {
-
-
-    componentDidMount() {
-        ui.start('#firebaseui-auth-container', {
-            signInOptions: [
-                firebase.auth.EmailAuthProvider.PROVIDER_ID,
-                firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-                firebase.auth.FacebookAuthProvider.PROVIDER_ID
-            ],
-            signInFlow: 'popup',
-            signInSuccessUrl: "localhost:3000/login",
-            callbacks: {
-                signInSuccess: function (currentUser, credential, redirectUrl) {
-                    console.log(currentUser, credential, redirectUrl);
-                    // User successfully signed in.
-                    // Return type determines whether we continue the redirect automatically
-                    // or whether we leave that to developer to handle.
-                    return true;
-                },
-                uiShown: function () {
-                    // The widget is rendered.
-                    // Hide the loader.
-                    document.getElementById('loader').style.display = 'none';
-                }
-            }
-        });
-    }
 
     render() {
         return (
             <div className="text-center mt-5">
                 <h1>Sign in</h1>
-                <div id="firebaseui-auth-container"></div>
-                <div id="loader">Loading...</div>
+                <FirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
             </div>
-
 
         )
     }
