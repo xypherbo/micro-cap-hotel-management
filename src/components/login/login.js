@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { FirebaseAuth } from 'react-firebaseui';
 import firebase from 'firebase';
 
@@ -15,7 +14,7 @@ firebase.initializeApp(config);
 
 const uiConfig = {
     signInFlow: 'popup',
-    signInSuccessUrl: '/signedIn',
+    signInSuccessUrl: '/',
     signInOptions: [
         firebase.auth.EmailAuthProvider.PROVIDER_ID,
         firebase.auth.GoogleAuthProvider.PROVIDER_ID,
