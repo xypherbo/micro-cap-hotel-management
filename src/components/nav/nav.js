@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Headroom from 'react-headroom';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -11,15 +11,23 @@ const mapDispatchToProps = (dispatch, props) => {
     }
 }
 
-const Navbar = props => {
-    return (
-        <Headroom>
-            <nav className="navbar navbar-dark bg-dark custom">
-                <a className="navbar-brand">Lorem ipsum</a>
-                <a className="menu" onClick={props.open}><i className="fa fa-bars"></i> Menu</a>
-            </nav>
-        </Headroom>
-    )
+class Navbar extends Component {
+
+    constructor(props) {
+        super(props);
+        this.props = props;
+    }
+
+    render() {
+        return (
+            <Headroom>
+                <nav className="navbar navbar-dark bg-dark custom">
+                    <a className="navbar-brand">Lorem ipsum</a>
+                    <a className="menu" onClick={this.props.open}><i className="fa fa-bars"></i> Menu</a>
+                </nav>
+            </Headroom>
+        )
+    }
 }
 
 export default connect(null, mapDispatchToProps)(Navbar)

@@ -1,64 +1,42 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import firebase from 'firebase';
 
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { open_menu } from '../../ducks/navbar'
+import { signOut } from '../../ducks/firebase'
+import { close_menu } from '../../ducks/navbar'
 
 import "./menu.css"
 
 
 const mapStateToProps = (state, props) => {
-    return {
-    }
+    return Object.assign({}, state)
 }
 
 const mapDispatchToProps = (dispatch, props) => {
     return {
-        open: bindActionCreators(open_menu, dispatch)
+        signout: bindActionCreators(signOut, dispatch),
+        close_menu: bindActionCreators(close_menu, dispatch)
     }
 }
 
-
 class Menu extends Component {
 
-    constructor() {
-        super();
-        this.state = {
-            loggedIn: false
-        }
-
-        firebase.auth().onAuthStateChanged((user) => {
-            if (user) {
-                console.log(user);
-                this.setState({ loggedIn: true });
-            }
-        })
-    }
-
-    logout = () => {
-        firebase.auth().signOut().then(() => {
-            this.setState({ loggedIn: false });
-            this.close();
-        }, (err) => {
-            console.log("Logout failed")
-        })
-    }
-
-    close = () => {
-        this.props.onMenuClose();
+    constructor(props) {
+        super(props);
+        this.props = props;
     }
 
     render() {
         return (
-            <div className={"side-menu " + (this.props.menuState ? "visible" : "")} >
+            <div className={"side-menu " + (this.props.navbarDucks.menu_opened ? "visible" : "")} >
                 <ul className="mlinks">
-                    <li><Link to="/" onClick={this.close}>Home</Link></li>
-                    <li className={!this.state.loggedIn ? null : 'd-none'}><Link to="/login" onClick={this.close} >Sign in</Link></li>
-                    <li className={this.state.loggedIn ? null : 'd-none'}><a onClick={this.logout} >Sign out</a></li>
+                    <li><Link to="/" onClick={this.props.close_menu}>Home</Link></li>
+                    <li><Link to="/floorplan" onClick={this.props.close_menu}>Floor Plan</Link></li>
+                    <li className={!this.props.firebaseDucks.login ? null : 'd-none'}><Link to="/login" onClick={this.props.close_menu} >Sign in</Link></li>
+                    <li className={this.props.firebaseDucks.login ? null : 'd-none'}><a onClick={this.props.signout} >Sign out</a></li>
                 </ul>
-                <a className="cross" onClick={this.close}> <i className="fa fa-times"></i></a>
+                <a className="cross" onClick={this.props.close_menu}> <i className="fa fa-times"></i></a>
             </div >
         )
     }
