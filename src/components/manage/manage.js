@@ -3,7 +3,13 @@ import Modal from 'react-modal'
 import { Stage, Layer, Rect, Text } from 'react-konva';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { openAddFloorModal, closeAddFloorModal, addRoom, dropRoom } from '../../ducks/manage'
+import {
+    openAddFloorModal,
+    closeAddFloorModal,
+    addRoom,
+    dropRoom,
+    saveFloor
+} from '../../ducks/manage'
 
 const mapStateToProps = (state, props) => {
     return Object.assign({}, state)
@@ -14,7 +20,8 @@ const mapDispatchToProps = (dispatch, props) => {
         open_modal: bindActionCreators(openAddFloorModal, dispatch),
         close_modal: bindActionCreators(closeAddFloorModal, dispatch),
         add_room: bindActionCreators(addRoom, dispatch),
-        drop_room: bindActionCreators(dropRoom, dispatch)
+        drop_room: bindActionCreators(dropRoom, dispatch),
+        save: bindActionCreators(saveFloor, dispatch)
     }
 }
 
@@ -50,16 +57,24 @@ class Manage extends Component {
                                             key={i}
                                             x={room.x}
                                             y={room.y}
-                                            fill={'black'}
+                                            fill={'green'}
                                             width={room.width}
                                             height={room.height}
                                             draggable={true}
-                                            onDragEnd={this.props.drop_room}
+                                            onDragMove={this.props.drop_room}
+                                        />
+                                    })}
+                                    {this.props.manageDucks.rooms.map((room, i) => {
+                                        return <Text
+                                            text={"R:" + i}
+                                            x={room.x + (room.width / 2)}
+                                            y={room.y + (room.height / 2)}
                                         />
                                     })}
                                 </Layer>
                             </Stage>
                             <button onClick={this.props.close_modal}>Close</button>
+                            <button onClick={this.props.save}>Save</button>
                         </Modal>
                     </div>
                 </div>

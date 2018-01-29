@@ -1,5 +1,6 @@
 export const OPEN_ADD_FLOOR_MODAL = 'OPEN_ADD_FLOOR_MODAL'
 export const CLOSE_ADD_FLOOR_MODAL = 'CLOSE_ADD_FLOOR_MODAL'
+export const SAVE_FLOOR = 'SAVE_FLOOR'
 const ADD_ROOM = 'ADD_ROOM'
 const ON_DROP_ROOM = 'ON_DROP_ROOM'
 
@@ -58,6 +59,10 @@ export function closeAddFloorModal() {
 
 export function addRoom() {
     return { type: ADD_ROOM }
+}
+
+export function saveFloor(floor) {
+    return { type: SAVE_FLOOR, payload: floor }
 }
 
 export function dropRoom(pos) {
