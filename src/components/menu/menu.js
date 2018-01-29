@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { signOut } from '../../ducks/firebase'
 import { close_menu } from '../../ducks/navbar'
 
+import Menulink from './components/link'
 import "./menu.css"
 
 
@@ -31,9 +31,10 @@ class Menu extends Component {
         return (
             <div className={"side-menu " + (this.props.navbarDucks.menu_opened ? "visible" : "")} >
                 <ul className="mlinks">
-                    <li><Link to="/" onClick={this.props.close_menu}>Home</Link></li>
-                    <li><Link to="/floorplan" onClick={this.props.close_menu}>Floor Plan</Link></li>
-                    <li className={!this.props.firebaseDucks.login ? null : 'd-none'}><Link to="/login" onClick={this.props.close_menu} >Sign in</Link></li>
+                    <Menulink close_menu={this.props.close_menu} path="/" label="Home"></Menulink>
+                    <Menulink close_menu={this.props.close_menu} path="/floorplan" label="Floor Plan"></Menulink>
+                    <Menulink close_menu={this.props.close_menu} path="/manage" label="Manage"></Menulink>
+                    <Menulink close_menu={this.props.close_menu} path="/login" label="Sign in" className={!this.props.firebaseDucks.login ? null : 'd-none'}></Menulink>
                     <li className={this.props.firebaseDucks.login ? null : 'd-none'}><a onClick={this.props.signout} >Sign out</a></li>
                 </ul>
                 <a className="cross" onClick={this.props.close_menu}> <i className="fa fa-times"></i></a>

@@ -4,18 +4,13 @@ import { SIGNOUT, signOutSuccess, signOutFail } from '../ducks/firebase'
 
 function* logout() {
     try {
-        console.log("aaaa");
-        yield call(signOut)
+        yield call(() => { firebase.auth().signOut() })
         yield put(signOutSuccess());
     } catch (err) {
         yield put(signOutFail());
     }
 }
 
-function signOut() {
-    firebase.auth().signOut();
-}
-
-export default function* watchLogout() {
+export default function* () {
     yield takeLatest(SIGNOUT, logout);
 }

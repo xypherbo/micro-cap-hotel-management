@@ -2,16 +2,6 @@ import React, { Component } from 'react';
 import { FirebaseAuth } from 'react-firebaseui';
 import firebase from 'firebase';
 
-const config = {
-    apiKey: "AIzaSyDBt1G9araVMvUzpULK7Jcu-gD3d0INXig",
-    authDomain: "hotel-1ec5c.firebaseapp.com",
-    databaseURL: "https://hotel-1ec5c.firebaseio.com",
-    projectId: "hotel-1ec5c",
-    storageBucket: "hotel-1ec5c.appspot.com",
-    messagingSenderId: "1059369533781"
-};
-firebase.initializeApp(config);
-
 const uiConfig = {
     signInFlow: 'popup',
     signInSuccessUrl: '/',

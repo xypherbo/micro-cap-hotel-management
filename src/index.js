@@ -17,6 +17,16 @@ import rootSaga from './sagas'
 const store = configureStore();
 store.runSaga(rootSaga)
 
+
+const config = {
+    apiKey: "AIzaSyDBt1G9araVMvUzpULK7Jcu-gD3d0INXig",
+    authDomain: "hotel-1ec5c.firebaseapp.com",
+    databaseURL: "https://hotel-1ec5c.firebaseio.com",
+    projectId: "hotel-1ec5c",
+    storageBucket: "hotel-1ec5c.appspot.com",
+    messagingSenderId: "1059369533781"
+};
+firebase.initializeApp(config);
 firebase.auth().onAuthStateChanged((user) => {
     if (user) {
         store.dispatch(signInSuccess(user))
