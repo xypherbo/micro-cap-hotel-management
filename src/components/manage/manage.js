@@ -21,7 +21,7 @@ const mapDispatchToProps = (dispatch, props) => {
         close_modal: bindActionCreators(closeAddFloorModal, dispatch),
         add_room: bindActionCreators(addRoom, dispatch),
         drop_room: bindActionCreators(dropRoom, dispatch),
-        save: bindActionCreators(saveFloor, dispatch)
+        save_floor: bindActionCreators(saveFloor, dispatch)
     }
 }
 
@@ -30,6 +30,20 @@ class Manage extends Component {
     constructor(props) {
         super(props)
         this.props = props;
+        this.state = {
+            floor_name: ""
+        }
+    }
+
+    handleChange = (event) => {
+        this.setState({ floor_name: event.target.value });
+    }
+
+    save = () => {
+        this.props.save_floor({
+            floor_name: this.state.floor_name,
+            floor_plan: this.props.manageDucks.rooms
+        })
     }
 
     render() {
@@ -49,6 +63,7 @@ class Manage extends Component {
                             isOpen={this.props.manageDucks.add_floor_modal_opened}
                             onRequestClose={this.props.close_modal}>
                             <h1>Floor plan</h1>
+                            Name :<input type="text" value={this.state.floor_name} onChange={this.handleChange} />
                             <button onClick={this.props.add_room}>Add room</button>
                             <Stage width={800} height={600}>
                                 <Layer>
@@ -74,7 +89,7 @@ class Manage extends Component {
                                 </Layer>
                             </Stage>
                             <button onClick={this.props.close_modal}>Close</button>
-                            <button onClick={this.props.save}>Save</button>
+                            <button onClick={this.save}>Save</button>
                         </Modal>
                     </div>
                 </div>
