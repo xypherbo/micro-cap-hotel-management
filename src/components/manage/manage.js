@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Modal from 'react-modal'
-import { Stage, Layer, Rect, Text } from 'react-konva';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import {
@@ -8,8 +7,11 @@ import {
     closeAddFloorModal,
     addRoom,
     dropRoom,
-    saveFloor
+    saveFloor,
+    fetchFloor
 } from '../../ducks/manage'
+
+import FloorDisplay from './components/floor_display'
 
 const mapStateToProps = (state, props) => {
     return Object.assign({}, state)
@@ -21,7 +23,8 @@ const mapDispatchToProps = (dispatch, props) => {
         close_modal: bindActionCreators(closeAddFloorModal, dispatch),
         add_room: bindActionCreators(addRoom, dispatch),
         drop_room: bindActionCreators(dropRoom, dispatch),
-        save_floor: bindActionCreators(saveFloor, dispatch)
+        save_floor: bindActionCreators(saveFloor, dispatch),
+        fetch_floor: bindActionCreators(fetchFloor, dispatch)
     }
 }
 
@@ -33,6 +36,10 @@ class Manage extends Component {
         this.state = {
             floor_name: ""
         }
+    }
+
+    componentDidMount() {
+        this.props.fetch_floor();
     }
 
     handleChange = (event) => {
@@ -65,29 +72,11 @@ class Manage extends Component {
                             <h1>Floor plan</h1>
                             Name :<input type="text" value={this.state.floor_name} onChange={this.handleChange} />
                             <button onClick={this.props.add_room}>Add room</button>
-                            <Stage width={800} height={600}>
-                                <Layer>
-                                    {this.props.manageDucks.rooms.map((room, i) => {
-                                        return <Rect
-                                            key={i}
-                                            x={room.x}
-                                            y={room.y}
-                                            fill={'green'}
-                                            width={room.width}
-                                            height={room.height}
-                                            draggable={true}
-                                            onDragMove={this.props.drop_room}
-                                        />
-                                    })}
-                                    {this.props.manageDucks.rooms.map((room, i) => {
-                                        return <Text
-                                            text={"R:" + i}
-                                            x={room.x + (room.width / 2)}
-                                            y={room.y + (room.height / 2)}
-                                        />
-                                    })}
-                                </Layer>
-                            </Stage>
+                            <FloorDisplay
+                                rooms={this.props.manageDucks.rooms}
+                                onDrop={this.props.drop_room}
+                                dragable={false}
+                            ></FloorDisplay>
                             <button onClick={this.props.close_modal}>Close</button>
                             <button onClick={this.save}>Save</button>
                         </Modal>

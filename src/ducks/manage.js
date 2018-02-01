@@ -1,6 +1,7 @@
 export const OPEN_ADD_FLOOR_MODAL = 'OPEN_ADD_FLOOR_MODAL'
 export const CLOSE_ADD_FLOOR_MODAL = 'CLOSE_ADD_FLOOR_MODAL'
 export const SAVE_FLOOR = 'SAVE_FLOOR'
+export const FETCH_FLOOR = 'FETCH_FLOOR'
 const SAVE_FLOOR_SUCCESS = 'SAVE_FLOOR_SUCCESS'
 const SAVE_FLOOR_FAIL = 'SAVE_FLOOR_FAIL'
 const ADD_ROOM = 'ADD_ROOM'
@@ -63,6 +64,10 @@ export function closeAddFloorModal() {
 
 export function addRoom() {
     return { type: ADD_ROOM }
+}
+
+export function fetchFloor() {
+    return { type: FETCH_FLOOR }
 }
 
 export function saveFloor(floor) {

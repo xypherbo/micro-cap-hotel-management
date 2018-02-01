@@ -1,6 +1,6 @@
 import firebase from 'firebase';
 import { call, put, takeLatest } from 'redux-saga/effects'
-import { SAVE_FLOOR, saveFloorSuccess, saveFloorFail } from '../ducks/manage'
+import { SAVE_FLOOR, FETCH_FLOOR, saveFloorSuccess, saveFloorFail } from '../ducks/manage'
 
 function* saveFloor(action) {
     try {
@@ -12,6 +12,16 @@ function* saveFloor(action) {
     } catch (err) {
         console.log(err);
         yield put(saveFloorFail());
+    }
+}
+
+function* fetchFloor(action) {
+    try {
+        yield call(() => {
+            firebase.database().ref('/floors').once('value')
+        })
+    } catch (err) {
+
     }
 }
 
